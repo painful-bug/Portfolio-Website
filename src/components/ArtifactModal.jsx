@@ -91,12 +91,26 @@ export default function ArtifactModal({ project, onClose }) {
               )}
 
               {/* Visit Link */}
-              <a href="#" className="artifact__visit-btn">
-                <span className="artifact__visit-text font-serif">
-                  Visit Live Site
-                </span>
-                <span className="material-symbols-outlined">arrow_outward</span>
-              </a>
+              {project.githubLink && project.githubLink !== '#' ? (
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="artifact__visit-btn"
+                >
+                  <span className="artifact__visit-text font-serif">
+                    View on GitHub
+                  </span>
+                  <span className="material-symbols-outlined">arrow_outward</span>
+                </a>
+              ) : (
+                <div className="artifact__visit-btn" style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                  <span className="artifact__visit-text font-serif">
+                    Code Private / Coming Soon
+                  </span>
+                  <span className="material-symbols-outlined">lock</span>
+                </div>
+              )}
             </div>
 
             {/* Right: Narrative */}

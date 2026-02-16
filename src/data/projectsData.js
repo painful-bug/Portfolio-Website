@@ -32,6 +32,7 @@ BEGIN
 END;`,
     span: 'full',
     articleTitle: 'Engineering Truth from Chaos',
+    githubLink: 'https://github.com/painful-bug/Data-Warehouse-Portfolio-Project-MS-SQL-Server-',
   },
   {
     id: 2,
@@ -62,6 +63,7 @@ END;`,
         self.classifier = nn.Linear(256, num_classes)`,
     span: 'half',
     articleTitle: 'Seeing Beyond the Frame',
+    githubLink: 'https://github.com/painful-bug/driver-distraction-detection-ML-project',
   },
   {
     id: 3,
@@ -92,6 +94,7 @@ END;`,
     span: 'half',
     stagger: true,
     articleTitle: 'Teaching Machines to Think',
+    githubLink: 'https://github.com/painful-bug/TDS-Project-1',
   },
   {
     id: 4,
@@ -120,6 +123,7 @@ END;`,
         return report`,
     span: 'half',
     articleTitle: 'Intelligence at Scale',
+    githubLink: 'https://github.com/Error-404-GDG-Solution-Challenge-2025/financial-assistant-final',
   },
   {
     id: 5,
@@ -149,6 +153,7 @@ END;`,
     span: 'half',
     stagger: true,
     articleTitle: 'Motion as Language',
+    githubLink: '#', // Placeholder or specific link if available later
   },
 ];
 
