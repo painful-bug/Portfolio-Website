@@ -11,7 +11,7 @@ export default function Signal() {
     const data = new FormData(form);
 
     try {
-      const res = await fetch('https://formsubmit.co/ajax/ujanaishik109@gmail.com', {
+      const res = await fetch('https://formsubmit.co/ajax/official.aishik109@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: data,
@@ -53,9 +53,9 @@ export default function Signal() {
 
             {/* Direct Links */}
             <div className="signal__direct-links">
-              <a href="mailto:ujanaishik109@gmail.com" className="signal__direct-link">
+              <a href="mailto:official.aishik109@gmail.com" className="signal__direct-link">
                 <span className="material-symbols-outlined signal__direct-icon">mail</span>
-                <span>ujanaishik109@gmail.com</span>
+                <span>official.aishik109@gmail.com</span>
               </a>
               <a href="https://www.linkedin.com/in/aishik-bandyopadhyay-ab4815286/" className="signal__direct-link" target="_blank" rel="noopener noreferrer">
                 <span className="material-symbols-outlined signal__direct-icon">link</span>
@@ -146,9 +146,9 @@ export default function Signal() {
         <div className="signal__bottom-inner">
           <span className="signal__copy">© 2025 Aishik Bandyopadhyay</span>
           <div className="signal__bottom-links">
-            <a href="mailto:ujanaishik109@gmail.com" className="signal__bottom-link">Email</a>
-            <a href="https://linkedin.com/in/aishik-bandyopadhyay" className="signal__bottom-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/aishik-b" className="signal__bottom-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="mailto:official.aishik109@gmail.com" className="signal__bottom-link">Email</a>
+            <a href="https://www.linkedin.com/in/aishik-bandyopadhyay-ab4815286/" className="signal__bottom-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/painful-bug" className="signal__bottom-link" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
       </div>
