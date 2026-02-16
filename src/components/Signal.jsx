@@ -57,11 +57,11 @@ export default function Signal() {
                 <span className="material-symbols-outlined signal__direct-icon">mail</span>
                 <span>ujanaishik109@gmail.com</span>
               </a>
-              <a href="https://linkedin.com/in/aishik-bandyopadhyay" className="signal__direct-link" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/aishik-bandyopadhyay-ab4815286/" className="signal__direct-link" target="_blank" rel="noopener noreferrer">
                 <span className="material-symbols-outlined signal__direct-icon">link</span>
                 <span>LinkedIn</span>
               </a>
-              <a href="https://github.com/aishik-b" className="signal__direct-link" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/painful-bug" className="signal__direct-link" target="_blank" rel="noopener noreferrer">
                 <span className="material-symbols-outlined signal__direct-icon">code</span>
                 <span>GitHub</span>
               </a>
