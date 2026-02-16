@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Artifact - Morning Mist Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Noto+Sans:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#169c60",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211a",
+                        "mist-surface": "rgba(255, 255, 255, 0.65)",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.1%22/%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for the modal content */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        
+        /* Drop Cap Style */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Newsreader', serif;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            font-weight: 300;
+            color: #169c60; /* Using primary color */
+            font-style: italic;
+        }
+
+        /* Simulating the "Swoop" ease */
+        .animate-swoop-in {
+            animation: swoopIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes swoopIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans antialiased text-[#4A5D54] overflow-hidden">
+<!-- Background Simulation: This represents the "Fog Walk" or "Work Grid" underneath -->
+<div aria-hidden="true" class="fixed inset-0 z-0 pointer-events-none">
+<div class="absolute inset-0 bg-background-light dark:bg-background-dark"></div>
+<!-- Decorative blurred blobs to simulate content behind -->
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-[80px]"></div>
+<div class="absolute inset-0 bg-noise opacity-40 mix-blend-overlay"></div>
+</div>
+<!-- Modal Overlay Backdrop -->
+<!-- Using backdrop-blur and a tinted background as requested -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-background-dark/30 backdrop-blur-md transition-opacity duration-300">
+<!-- The Artifact Container -->
+<!-- 80vw width, 90vh height, white paper texture -->
+<div class="relative w-full max-w-[1400px] h-[90vh] w-[80vw] bg-[#fdfdfd] dark:bg-[#1a2c24] rounded-lg shadow-2xl overflow-hidden flex flex-col animate-swoop-in ring-1 ring-black/5 dark:ring-white/10 group/artifact">
+<!-- Noise Texture Overlay on Paper -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-noise z-10"></div>
+<!-- Sticky Header / Controls -->
+<div class="absolute top-0 right-0 z-30 p-6 flex gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white/80 dark:bg-black/40 backdrop-blur text-primary hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-black/5 dark:border-white/10 group">
+<span class="material-symbols-outlined text-xl group-hover:rotate-90 transition-transform duration-300">close</span>
+</button>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar relative z-20">
+<!-- Hero Image Area: Full Bleed Top -->
+<div class="w-full h-[40vh] relative overflow-hidden">
+<img alt="Fintech Data Visualization Abstract" class="w-full h-full object-cover object-center" data-alt="Abstract gradient mesh representing fintech data flow in shades of green and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwQQdA6EKTZ10KnozQ6Xtb5G7cPmkZ_5w48owIIXRHPbCzfDujf5iy-hCm02Oyt4yJ8OqPXqgWJo_LQ0xblTEme6Ys-BkQ3doqxBaxALQVslTbqk3RcSGpycjZMk59Z-CZmO8u664cFXzVzyQxGzlrC7HtD7eQEcTpuO-hgTT8eyEslZvva3FC4wugsp2EEi3ReBMbOhhi3g-j_vhJRjyVQG1nel9pzFPtL1lwsuPwqIS5DTC89y5cIdsVo_Bh5UbM-f4S0j9bK9vU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+<!-- Title Overlay on Image (Optional stylistic choice, kept subtle) -->
+<div class="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black/40 to-transparent">
+<h1 class="font-display text-4xl md:text-6xl text-white italic tracking-tight drop-shadow-md">Fintech Dashboard v2</h1>
+</div>
+</div>
+<!-- Editorial Content Layout -->
+<div class="flex flex-col lg:flex-row h-auto min-h-[50vh]">
+<!-- Left Column: Visuals & Gallery -->
+<div class="w-full lg:w-5/12 p-8 lg:p-12 lg:border-r border-black/5 dark:border-white/5 flex flex-col gap-8 bg-background-light/30 dark:bg-background-dark/30">
+<!-- Metadata Block -->
+<div class="flex flex-col gap-6">
+<div class="space-y-2">
+<p class="font-sans text-xs uppercase tracking-widest text-gray-500 font-medium">Role</p>
+<p class="font-display text-xl text-primary dark:text-green-400">UI Engineering &amp; Interaction Design</p>
+</div>
+<div class="space-y-2">
+<p class="font-sans text-xs uppercase tracking-widest text-gray-500 font-medium">Year</p>
+<p class="font-sans text-base">2023</p>
+</div>
+<div class="space-y-2">
+<p class="font-sans text-xs uppercase tracking-widest text-gray-500 font-medium">Tech Stack</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono">React</span>
+<span class="px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono">TypeScript</span>
+<span class="px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono">D3.js</span>
+<span class="px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono">WebGL</span>
+</div>
+</div>
+</div>
+<!-- Secondary Visuals -->
+<div class="mt-auto space-y-6">
+<div class="rounded-lg overflow-hidden shadow-md group/image relative">
+<img alt="Data Analytics Interface Detail" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover/image:scale-105" data-alt="Close-up macro shot of a clean data analytics chart on a screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKZBEqyeAsvC4J_cwx9jp1wehCa2-pR05FOjwgpkekB6NawATOgnY7PZRZT7JIYJTngnNI9S-BkeeLiLOHERZ0nSshoNItgiep1N7yZHxTyLVnP3-a1ShOy3pOAHBYw-tyoTJxPoYDcB1kpzhroVWAf8KLifRJYSEKpFyXEY2DvSIyIc0esNtte0BD9xDDW8X7_Zodge7oartlkS47XPEGRJpf_vK1LXITzmqW1c8_RpArzcM5mFFs2qU_ixUWLbOmHrfGvgsXc5tn"/>
+<div class="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/10 transition-colors duration-500"></div>
+</div>
+<!-- Action Button -->
+<a class="inline-flex items-center justify-between w-full px-6 py-4 bg-primary text-white rounded-lg hover:bg-[#128a53] transition-all duration-300 shadow-lg shadow-primary/20 group/btn" href="#">
+<span class="font-display text-lg italic pr-4">Visit Live Site</span>
+<span class="material-symbols-outlined transition-transform duration-300 group-hover/btn:translate-x-1">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Narrative Text -->
+<div class="w-full lg:w-7/12 p-8 lg:p-16 flex flex-col justify-start">
+<!-- Article Header -->
+<div class="mb-10">
+<h2 class="font-display text-3xl text-gray-900 dark:text-white mb-2">Redefining Clarity</h2>
+<div class="h-1 w-20 bg-primary/30 rounded-full"></div>
+</div>
+<!-- The "Challenge" Section with Drop Cap -->
+<div class="prose prose-lg prose-stone dark:prose-invert max-w-none mb-12">
+<p class="drop-cap text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+                                Financial interfaces often suffer from a density problem. The sheer volume of real-time data can overwhelm the user, creating cognitive friction precisely when clarity is needed most. Our challenge was to strip away the noise without sacrificing data fidelity. We needed to create an environment where information breathes.
+                            </p>
+<p class="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mt-6">
+                                By utilizing a diffused "fog" metaphor for the UI, we established depth as a primary signifier of importance. Critical alerts pierce through the mist, while historical data recedes into the background until summoned.
+                            </p>
+</div>
+<!-- The "Solution" Section -->
+<div class="mb-8">
+<h3 class="font-display text-2xl text-gray-800 dark:text-gray-100 mb-4">The Technical Approach</h3>
+<p class="text-base leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
+                                We leveraged WebGL shaders to create the atmospheric background effects, ensuring they ran on the GPU to keep the main thread free for complex D3.js data calculations. The interaction model relies heavily on "micro-interactions"—subtle shifts in elevation and blur radius that guide the user's attention.
+                            </p>
+<!-- Code Snippet Artifact -->
+<div class="rounded-lg bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 p-4 font-mono text-sm text-gray-700 dark:text-gray-400 overflow-x-auto">
+<div class="flex gap-2 mb-2 opacity-50">
+<div class="w-3 h-3 rounded-full bg-red-400"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+<div class="w-3 h-3 rounded-full bg-green-400"></div>
+</div>
+<code class="block whitespace-pre">
+const mistyView = useMemo(() =&gt; {
+  return data.filter(d =&gt; d.clarity &gt; threshold)
+             .map(visualize);
+}, [data, threshold]);
+                                </code>
+</div>
+</div>
+<!-- Credits / Footer of Article -->
+<div class="mt-auto pt-10 border-t border-gray-100 dark:border-white/5 flex justify-between items-center text-sm text-gray-400">
+<span>Elena Vance</span>
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+<span>Portfolio 2024</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

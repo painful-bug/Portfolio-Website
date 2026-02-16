@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Morning Mist - Work Grid</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#169c60",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211a",
+                        "mist-white": "rgba(255, 255, 255, 0.65)",
+                        "mist-border": "rgba(255, 255, 255, 0.40)",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"],
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    },
+                    transitionTimingFunction: {
+                        'swoop': 'cubic-bezier(0.25, 1, 0.5, 1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar to match the minimal aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #d1d5db;
+            border-radius: 20px;
+        }
+        
+        /* Utility for the glass effect specifically */
+        .glass-card {
+            background-color: rgba(255, 255, 255, 0.60);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Group hover logic for image clarity */
+        .group:hover .mist-image {
+            filter: grayscale(0%) blur(0px);
+            transform: scale(1.02);
+        }
+        
+        .mist-image {
+            filter: grayscale(100%) blur(3px);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: filter, transform;
+        }
+
+        /* Hover lift effect */
+        .hover-lift {
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(44, 62, 54, 0.10);
+        }
+
+        /* Custom cursor logic (simulated with CSS for this demo, usually JS follows mouse) */
+        .project-card {
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body class="bg-background-light text-[#0e1b15] font-display antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
+<!-- Noise Overlay -->
+<div class="fixed inset-0 pointer-events-none z-50 bg-noise opacity-40 mix-blend-overlay"></div>
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Navigation -->
+<header class="sticky top-0 z-40 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e8f3ee]/60 bg-background-light/80 backdrop-blur-md px-6 py-4 lg:px-10">
+<div class="flex items-center gap-4 text-[#0e1b15]">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined !text-2xl">eco</span>
+</div>
+<h2 class="text-[#0e1b15] text-xl font-bold italic leading-tight tracking-tight">Morning Mist</h2>
+</div>
+<div class="flex items-center gap-8 hidden md:flex">
+<nav class="flex items-center gap-8">
+<a class="text-[#0e1b15]/70 hover:text-primary transition-colors text-base font-medium" href="#">Work</a>
+<a class="text-[#0e1b15]/70 hover:text-primary transition-colors text-base font-medium" href="#">About</a>
+<a class="text-[#0e1b15]/70 hover:text-primary transition-colors text-base font-medium" href="#">Contact</a>
+</nav>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-6 bg-primary hover:bg-primary/90 transition-colors text-[#f8fbfa] text-sm font-bold tracking-wide shadow-lg shadow-primary/20">
+<span>Resume</span>
+</button>
+</div>
+<button class="md:hidden text-[#0e1b15]">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="layout-container flex flex-col grow w-full max-w-[1440px] mx-auto px-6 md:px-10 lg:px-20 py-12 lg:py-24">
+<div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
+<!-- Sticky Section Header (Left) -->
+<aside class="lg:w-1/4 relative">
+<div class="lg:sticky lg:top-32 flex flex-col gap-4">
+<div class="w-12 h-[1px] bg-primary/40 mb-2"></div>
+<h1 class="text-4xl lg:text-5xl font-display italic font-medium text-[#0e1b15] leading-tight">
+                            Selected <br class="hidden lg:block"/> Works
+                        </h1>
+<span class="font-sans text-sm font-bold tracking-widest text-primary uppercase mt-2">(04 Projects)</span>
+<p class="font-sans text-[#0e1b15]/60 text-sm mt-6 max-w-[240px] leading-relaxed">
+                            A curated collection of digital artifacts, exploring the intersection of finance, art, and utility.
+                        </p>
+</div>
+</aside>
+<!-- Masonry Grid (Right) -->
+<div class="lg:w-3/4 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 auto-rows-min">
+<!-- Card 1: Large Span -->
+<article class="group project-card hover-lift glass-card rounded-2xl overflow-hidden flex flex-col md:col-span-2 relative min-h-[480px]">
+<div class="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+<div class="bg-white/90 backdrop-blur rounded-full px-4 py-2 flex items-center gap-2 shadow-sm">
+<span class="text-xs font-sans font-bold tracking-wider uppercase text-primary">View Case</span>
+<span class="material-symbols-outlined text-sm text-primary">arrow_outward</span>
+</div>
+</div>
+<!-- Image Container -->
+<div class="w-full h-[320px] md:h-[480px] overflow-hidden bg-gray-200 relative">
+<img alt="Abstract data visualization with flowing lines in green and blue gradients representing financial data flows" class="w-full h-full object-cover mist-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo4FhTfdChnBX5wAEUHhdEvjDGbUGod6hC7Q-f_K5BocF93uu4OhIQMsyu9FPQ3vH5qZNRIsWQxOccUZ1Xwp-_h_PJ6WpHhejcEXugbd-eXoFJ1D2UEDnKU0G87F0_qN592yY0diibUQKrVQ9ltlNnokc7_IITp5xrrJK1wWQJMzp7apZS9cUiztYnlZZubLgowdR_Mb-oMCLyGXwO8fBP6nDV-TGUHlF8AOxX_V7Orzh7FTJMoDtqPxZ7x1ZO69LpVW79p_k9uRNG"/>
+<!-- Noise texture specific to image for extra grit -->
+<div class="absolute inset-0 bg-noise opacity-20 mix-blend-overlay pointer-events-none"></div>
+</div>
+<!-- Card Content -->
+<div class="p-8 flex flex-col justify-between grow border-t border-white/40">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="text-3xl font-display italic text-[#0e1b15] group-hover:text-primary transition-colors duration-300">Aura Finance</h3>
+<p class="font-sans text-sm text-[#0e1b15]/60 mt-2">Next-gen fintech dashboard &amp; data visualization</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">React</span>
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">D3.js</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Card 2: Standard -->
+<article class="group project-card hover-lift glass-card rounded-2xl overflow-hidden flex flex-col min-h-[420px]">
+<div class="w-full h-[280px] overflow-hidden bg-gray-200 relative">
+<img alt="Minimalist product photography of a ceramic vase on a stone pedestal with soft shadows" class="w-full h-full object-cover mist-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTNyoPt4Z42vRj-1A2UjdJVy1s1ddLg_l2iJYYmaQLMVnoVQryLmPbocvXJxaD9jXr9mEmVU-_rOxBAre5SPNlHUdDTZs2Qfg3Am8056liyv1Jz_SVuv4XBB5yGfR92dWndOUHPwFPXitmpOHD5tZ1jOanqnz5qp9ngMo5hvp-_tdDybC7Lx37tTjWSkYuo9gYG5XQ4Z2KiJpBIn5lMRIV-O1cBbxl3FC2omoSoO6bi1k_CgJ3ArRt_tT4m8oKWk843AHvmyvXi08F"/>
+</div>
+<div class="p-6 flex flex-col justify-between grow border-t border-white/40">
+<div>
+<h3 class="text-2xl font-display italic text-[#0e1b15] group-hover:text-primary transition-colors duration-300">Lumina Supply</h3>
+<p class="font-sans text-sm text-[#0e1b15]/60 mt-2">E-commerce experience for modern ceramics</p>
+</div>
+<div class="mt-4 flex gap-2 flex-wrap">
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Shopify</span>
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">WebGL</span>
+</div>
+</div>
+</article>
+<!-- Card 3: Standard (Taller) -->
+<article class="group project-card hover-lift glass-card rounded-2xl overflow-hidden flex flex-col min-h-[420px] md:mt-12">
+<div class="w-full h-[280px] overflow-hidden bg-gray-200 relative">
+<img alt="Dark moody interface of a music synthesizer application with glowing knobs" class="w-full h-full object-cover mist-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCw4SP9gaycXFDhWttlSJoOlmJhV44nv6maM_tT4J_zv01RoBfrqt7nHZyuQyfq_c2YCUZmRH2Y_gKAlEhiIe-XPaU4sEycsd64tipcO0u92iUBlpXFcUN-3ooO1kAxz_A7ZhkD_hS7J3MnwvlLYWvv4wo0RGWzuJn8ES5t54NOunVlStAZUefjsVMIkfQUBCIgoo9gCHfcwIVjBhZRDdsOul7ZPGvB879wnGqDmVyYjDZRvQItP8HO_-W93of2JM85lpJhD7awvHB"/>
+</div>
+<div class="p-6 flex flex-col justify-between grow border-t border-white/40">
+<div>
+<h3 class="text-2xl font-display italic text-[#0e1b15] group-hover:text-primary transition-colors duration-300">Echo Chamber</h3>
+<p class="font-sans text-sm text-[#0e1b15]/60 mt-2">Audio synthesis playground &amp; spatial audio</p>
+</div>
+<div class="mt-4 flex gap-2 flex-wrap">
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Vue 3</span>
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Web Audio API</span>
+</div>
+</div>
+</article>
+<!-- Card 4: Standard -->
+<article class="group project-card hover-lift glass-card rounded-2xl overflow-hidden flex flex-col min-h-[420px]">
+<div class="w-full h-[280px] overflow-hidden bg-gray-200 relative">
+<img alt="Abstract fluid art in grayscale with ripples resembling oil in water" class="w-full h-full object-cover mist-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4hykUc7myOi4Gryt6xkxcX0P2E-oC6wTGBjsDqMzAsRDpAIBqdfH4KzOg4er0gfON4joRfD8s1BSq1hQw-t5U7FjfIqAH9uLReRCYKgYIUqYHlciW6P43B4j-KoJOsl71Bi_FxCjs7o4wQla8flYItJaIIQ_yQ9uP4uS5FOScmhTQAYmHSlmzoE3koe8M3hbs3bkV1M16hfbmlmJEZchzhG1H8LTXsLkNsOzM69CXVQY-g_IGYGfuUCW8oeucavl5bIY3IO8uRyoj"/>
+</div>
+<div class="p-6 flex flex-col justify-between grow border-t border-white/40">
+<div>
+<h3 class="text-2xl font-display italic text-[#0e1b15] group-hover:text-primary transition-colors duration-300">Kinetic Type</h3>
+<p class="font-sans text-sm text-[#0e1b15]/60 mt-2">Experimental typography engine for editorial layouts</p>
+</div>
+<div class="mt-4 flex gap-2 flex-wrap">
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Canvas</span>
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Typescript</span>
+</div>
+</div>
+</article>
+<!-- Card 5: Standard (Staggered) -->
+<article class="group project-card hover-lift glass-card rounded-2xl overflow-hidden flex flex-col min-h-[420px] md:mt-12">
+<div class="w-full h-[280px] overflow-hidden bg-gray-200 relative">
+<img alt="Low angle view of modern glass architecture reflecting the sky" class="w-full h-full object-cover mist-image" data-location="Tokyo, Japan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCUoA_raERIOYZZXuBOEGqQ47tULdamNFvNUusdXBpcrftlUoyjkP4a93cG0xGpbIC-kSc6gJzY13NU3nblSboH8aT4Az0K4_T89gVFLEBcWqohc4y-vItLlQxOpOuLYiewqjajeHNEFxap6oeFoL6pqPwlx1ZqYoe4fF9PsUAJOPve5-s9_4OFu4vuIN-XihyObn3ln_p5hwMDDH9Egj_Q92-ipN1cU3K3XoUlKIOWK3JbUG5Q4q0k4C6YbwGhIHAoX0PwQO-ucVF"/>
+</div>
+<div class="p-6 flex flex-col justify-between grow border-t border-white/40">
+<div>
+<h3 class="text-2xl font-display italic text-[#0e1b15] group-hover:text-primary transition-colors duration-300">Skyline Realty</h3>
+<p class="font-sans text-sm text-[#0e1b15]/60 mt-2">Immersive property viewing platform</p>
+</div>
+<div class="mt-4 flex gap-2 flex-wrap">
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Next.js</span>
+<span class="px-3 py-1 rounded-full border border-[#0e1b15]/10 text-[11px] font-sans uppercase tracking-wider text-[#0e1b15]/70 bg-white/30">Mapbox</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Bottom Fade for infinite feel -->
+<div class="w-full h-32 bg-gradient-to-b from-transparent to-background-light pointer-events-none mt-12"></div>
+</main>
+<!-- Minimal Footer Signal -->
+<footer class="w-full py-12 px-6 md:px-20 border-t border-[#e8f3ee] mt-auto">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="text-[#0e1b15]/40 text-sm font-sans">© 2024 Morning Mist Portfolio</span>
+<div class="flex gap-6">
+<a class="text-[#0e1b15]/60 hover:text-primary transition-colors text-sm font-sans uppercase tracking-widest" href="#">Twitter</a>
+<a class="text-[#0e1b15]/60 hover:text-primary transition-colors text-sm font-sans uppercase tracking-widest" href="#">LinkedIn</a>
+<a class="text-[#0e1b15]/60 hover:text-primary transition-colors text-sm font-sans uppercase tracking-widest" href="#">Email</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

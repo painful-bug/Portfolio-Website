@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Fog Walk - Morning Mist Portfolio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Noto+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#169c60",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#11211a",
+                        "mist-gray": "#97A8A0",
+                        "wet-slate": "#4A5D54",
+                        "deep-evergreen": "#2C3E36",
+                    },
+                    fontFamily: {
+                        "display": ["Newsreader", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    animation: {
+                        'drift': 'drift 20s infinite linear',
+                        'fade-in-blur': 'fadeInBlur 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        drift: {
+                            '0%': { backgroundPosition: '0% 0%' },
+                            '100%': { backgroundPosition: '100% 100%' },
+                        },
+                        fadeInBlur: {
+                            '0%': { opacity: '0', filter: 'blur(10px)', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', filter: 'blur(0px)', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom noise texture */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        
+        /* Custom cursor style for interaction */
+        .cursor-view {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.8)" stroke="%23169c60" stroke-width="1"/><text x="50%" y="54%" font-family="sans-serif" font-size="10" text-anchor="middle" fill="%23169c60" font-weight="bold">VIEW</text></svg>') 40 40, auto;
+        }
+
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .text-reveal-delay-1 { animation-delay: 0.2s; }
+        .text-reveal-delay-2 { animation-delay: 0.6s; }
+        .text-reveal-delay-3 { animation-delay: 1.0s; }
+    </style>
+</head>
+<body class="bg-background-light text-wet-slate antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
+<!-- Navbar: Minimalist & Fixed -->
+<nav class="fixed top-0 left-0 w-full z-50 px-6 py-8 md:px-12 flex justify-between items-start mix-blend-multiply pointer-events-none">
+<!-- Logo Area -->
+<a class="pointer-events-auto group" href="#">
+<div class="size-8 rounded-full border border-wet-slate/20 flex items-center justify-center bg-white/50 backdrop-blur-sm transition-transform duration-500 group-hover:scale-110">
+<span class="font-display italic font-medium text-lg text-deep-evergreen">E</span>
+</div>
+</a>
+<!-- Navigation Links -->
+<div class="hidden md:flex gap-8 pointer-events-auto">
+<a class="text-sm font-medium tracking-wide text-wet-slate hover:text-primary transition-colors duration-300" href="#work">WORK</a>
+<a class="text-sm font-medium tracking-wide text-wet-slate hover:text-primary transition-colors duration-300" href="#about">ABOUT</a>
+<a class="text-sm font-medium tracking-wide text-wet-slate hover:text-primary transition-colors duration-300" href="#contact">CONTACT</a>
+</div>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden pointer-events-auto text-wet-slate hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- Main Content Wrapper -->
+<main class="relative w-full min-h-screen">
+<!-- The Fog Walk (Hero Section) -->
+<section class="relative h-screen w-full flex flex-col justify-center px-6 md:px-12 lg:px-24 overflow-hidden">
+<!-- Mist Layer: Background Gradients & Noise -->
+<div class="absolute inset-0 z-0 pointer-events-none">
+<!-- Soft localized gradients to create depth -->
+<div class="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-[120px] opacity-40"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-[50%] h-[50%] bg-gradient-to-tl from-mist-gray/20 to-transparent rounded-full blur-[100px] opacity-30"></div>
+<!-- Animated Noise Texture -->
+<div class="absolute inset-0 bg-noise opacity-40 animate-drift"></div>
+</div>
+<!-- Content Container -->
+<div class="relative z-10 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center lg:items-start pt-20">
+<!-- Left Column: Primary Typography -->
+<div class="lg:col-span-8 flex flex-col gap-6 lg:gap-10">
+<!-- Status Indicator -->
+<div class="opacity-0 animate-fade-in-blur text-reveal-delay-1 inline-flex items-center gap-3 w-fit py-2 px-4 rounded-full bg-white/40 border border-white/60 backdrop-blur-md shadow-sm">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<span class="text-xs font-sans font-medium uppercase tracking-wider text-wet-slate">
+                            Currently building fintech
+                        </span>
+</div>
+<!-- Hero Title -->
+<h1 class="opacity-0 animate-fade-in-blur text-reveal-delay-2 font-display italic font-light text-[12vw] leading-[0.9] lg:text-[7rem] xl:text-[8.5rem] tracking-tight text-deep-evergreen mix-blend-darken -ml-1 md:-ml-2">
+                        Elena Vance<span class="text-primary">.</span>
+</h1>
+<!-- Subtitle / Role -->
+<div class="opacity-0 animate-fade-in-blur text-reveal-delay-3 flex flex-col gap-4 max-w-lg">
+<h2 class="font-display text-3xl md:text-4xl text-wet-slate font-light leading-snug">
+                            Creative Technologist &amp;<br/> Interface Designer
+                        </h2>
+<p class="font-sans text-mist-gray text-base md:text-lg font-light leading-relaxed max-w-md">
+                            Crafting digital clarity from chaos. I build atmosphere-driven interfaces that treat code as a craft and interaction as a language.
+                        </p>
+</div>
+<!-- Call to Action -->
+<div class="opacity-0 animate-fade-in-blur text-reveal-delay-3 mt-8">
+<button class="group flex items-center gap-3 text-deep-evergreen hover:text-primary transition-colors duration-300">
+<span class="font-sans font-medium text-sm tracking-widest uppercase border-b border-deep-evergreen/30 pb-0.5 group-hover:border-primary">
+                                Explore Selected Works
+                            </span>
+<span class="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-1">
+                                arrow_forward
+                            </span>
+</button>
+</div>
+</div>
+<!-- Right Column: Abstract Visual / Date (Optional decorative element) -->
+<div class="hidden lg:flex lg:col-span-4 justify-end items-start h-full pt-12">
+<div class="flex flex-col items-end gap-2 opacity-0 animate-fade-in-blur text-reveal-delay-3">
+<span class="font-sans text-xs font-medium tracking-widest text-mist-gray uppercase">Est. 2024</span>
+<div class="h-px w-12 bg-mist-gray/40"></div>
+<span class="font-sans text-xs font-medium tracking-widest text-mist-gray uppercase">San Francisco, CA</span>
+</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-in-blur text-reveal-delay-3 pointer-events-none">
+<span class="font-sans text-[10px] tracking-[0.2em] uppercase text-mist-gray">Scroll</span>
+<div class="h-12 w-px bg-gradient-to-b from-mist-gray/0 via-mist-gray/50 to-mist-gray/0"></div>
+</div>
+<!-- Decorative Floating Elements (Parallax feel) -->
+<div class="absolute right-[10%] bottom-[20%] w-64 h-80 opacity-0 animate-fade-in-blur text-reveal-delay-2 lg:block hidden pointer-events-none">
+<div class="w-full h-full border border-white/30 bg-white/10 backdrop-blur-[2px] rounded-lg transform rotate-6 translate-y-12"></div>
+</div>
+</section>
+</main>
+<script>
+        // Simple parallax effect for the title
+        document.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const title = document.querySelector('h1');
+            const status = document.querySelector('.bg-white\\/40'); // Selects the status pill
+            
+            if(title) {
+                // Title moves slightly slower than scroll speed
+                title.style.transform = `translateY(${scrollY * 0.15}px)`;
+            }
+            if(status) {
+                // Status moves slightly faster
+                status.style.transform = `translateY(${scrollY * 0.05}px)`;
+            }
+        });
+    </script>
+</body></html>
