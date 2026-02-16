@@ -11,10 +11,10 @@ const projects = [
     year: '2024',
     techStack: ['MS SQL Server', 'ETL Pipelines', 'Star Schema', 'Medallion Architecture'],
     description: [
-      'Enterprise data infrastructure often suffers from fragmented sources and inconsistent data quality. This project tackled the challenge of unifying CRM and ERP data sources with 18,500+ customer records into a single source of truth using production-grade patterns.',
-      'By implementing the Medallion Architecture (Bronze-Silver-Gold layers), we established a clear data lineage from raw ingestion to analytics-ready dimensions. The star schema design with SCD Type 2 support enables historical tracking without sacrificing query performance.',
+      'Enterprise data infrastructure often suffers from fragmented sources and inconsistent data quality. This project tackles the challenge of unifying heterogeneous CRM and ERP system data into a single analytics-ready source of truth using Microsoft SQL Server and production-grade Medallion Architecture.',
+      'The three-tier pipeline ingests raw data via BULK INSERT into Bronze tables, applies cleansing and deduplication in Silver (using ROW_NUMBER window functions, CASE-based standardization, and NULL handling), then materializes a star schema in Gold with dim_customers, dim_products, and fact_sales views—complete with SCD Type 2 support and surrogate key generation.',
     ],
-    technicalApproach: 'Built automated ETL pipelines using stored procedures with comprehensive data cleansing, deduplication via window functions (ROW_NUMBER, RANK), and robust error handling. The dimensional model features fact and dimension tables optimized for Tableau dashboards and ad-hoc SQL analysis.',
+    technicalApproach: 'Built idempotent ETL stored procedures with TRY-CATCH error handling, execution-time logging, and TABLOCK-optimized bulk loading. Silver layer transformations include TRIM-based cleansing, categorical standardization (e.g., M→Male, S→Single), date format conversion, and audit timestamps for data lineage tracking across all layers.',
     codeSnippet: `-- Medallion Architecture: Bronze → Silver → Gold
 CREATE PROCEDURE etl.load_silver_customers AS
 BEGIN
@@ -45,10 +45,10 @@ END;`,
     year: '2024',
     techStack: ['PyTorch', 'YOLOv8', 'LSTM', 'Computer Vision'],
     description: [
-      'Driver distraction is a leading cause of road accidents. This project developed a deep learning system capable of classifying 10 distinct driver distraction behaviors from the State Farm Kaggle dataset containing 22,000+ images.',
-      'The hybrid architecture combines the spatial feature extraction power of YOLOv8 with the temporal reasoning capabilities of LSTM networks, creating a system that understands not just what a driver is doing, but the temporal context of their actions.',
+      'Driver distraction is a leading cause of road accidents. This project developed a deep learning system that classifies 10 distinct driver behaviors from the State Farm Kaggle dataset, processing 22,384 image sequences using a sliding window approach (stride=1, sequence length=5) for temporal context.',
+      'The custom YOLO_LSTM_Attn architecture uses a frozen YOLOv8n backbone wrapped in a YOLOBackboneWrapper that extracts 256-dimensional feature vectors through SPPF-layer truncation and adaptive average pooling, feeding them into a bidirectional LSTM with a learned TemporalAttention mechanism for sequence-aware classification.',
     ],
-    technicalApproach: 'Implemented a sequence-based learning approach with sliding window for temporal context modeling. Used transfer learning with frozen YOLOv8 pretrained weights, weighted random sampling to handle class imbalance, and mixed precision training (FP16) for memory optimization on a 4GB GPU constraint.',
+    technicalApproach: 'Implemented a memory-efficient pipeline for 4GB VRAM: frozen YOLOv8n backbone (layers 0-9) produces [B,256,20,20] feature maps, pooled to 256-dim vectors per frame. WeightedRandomSampler handles class imbalance, while mixed-precision training (torch.cuda.amp.GradScaler) enables batch_size=2 training. The TemporalAttention module learns soft attention scores over LSTM hidden states for context-weighted prediction.',
     codeSnippet: `class HybridCNNLSTM(nn.Module):
     def __init__(self, num_classes=10):
         super().__init__()
@@ -70,15 +70,15 @@ END;`,
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
     heroImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80',
     detailImage: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?w=800&q=80',
-    tags: ['Python', 'Prompt Engineering'],
+    tags: ['Python', 'FastAPI'],
     role: 'AI Developer',
     year: '2024',
-    techStack: ['Python', 'Prompt Chaining', 'Self-Prompting', 'Code Generation'],
+    techStack: ['Python', 'FastAPI', 'GPT-4o-mini', 'Docker'],
     description: [
-      'Traditional AI assistants are constrained by their training data and predefined capabilities. This project pushes beyond those boundaries by creating an autonomous application that can dynamically generate, validate, and execute Python code for novel requests it has never encountered.',
-      'The system implements sophisticated prompt chaining and self-prompting techniques, creating a feedback loop where the AI can detect errors in its own generated code, correct them, and re-execute—all without human intervention.',
+      'A Dockerized FastAPI-based AI automation platform that intelligently routes natural-language task descriptions to either a library of predefined functions or an autonomous code-generation agent powered by GPT-4o-mini. It handles a diverse range of tasks including data formatting, contact sorting, log analysis, Markdown indexing, email parsing, credit card OCR, semantic similarity via embeddings, SQL queries, API data fetching, git operations, and web scraping.',
+      'For tasks outside the predefined library, the AIAgent class implements an autonomous generate-execute-debug loop: it dynamically produces Python code, installs required packages, executes in a subprocess sandbox, and self-corrects through up to 3 iterative rounds of error analysis and code regeneration—all without human intervention.',
     ],
-    technicalApproach: 'Built a multi-stage pipeline: intent classification → task decomposition → code generation → static analysis → sandboxed execution → error detection → self-correction loop. Each stage uses carefully engineered prompts that maintain context across the chain.',
+    technicalApproach: 'The FastAPI endpoint receives task descriptions, then a helper function uses LLM-based intent classification to match against known function signatures in the tasks module. Unmatched requests are forwarded to the AIAgent, which generates system prompts with strict workflow instructions, extracts code blocks via regex, manages package installation, and maintains conversation history for contextual multi-turn debugging.',
     codeSnippet: `class AgenticPipeline:
     def execute(self, user_request):
         intent = self.classify_intent(user_request)
@@ -100,15 +100,15 @@ END;`,
     image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
     heroImage: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1200&q=80',
     detailImage: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80',
-    tags: ['Web Research', 'NLP'],
+    tags: ['LangChain', 'RAG'],
     role: 'AI Engineer',
     year: '2024',
-    techStack: ['Python', 'NLP', 'Web Scraping', 'Reasoning Algorithms'],
+    techStack: ['Python', 'FastAPI', 'LangChain', 'React', 'Google Gemini', 'Firebase'],
     description: [
-      'Financial research requires synthesizing vast amounts of real-time data from diverse sources. This AI agent automates the entire research workflow—from intelligent web searching to deep analysis—producing comprehensive financial reports.',
-      'The agent utilizes advanced reasoning algorithms to understand complex user queries, identify relevant data sources, and synthesize information into actionable insights rather than raw data dumps.',
+      'A comprehensive AI-powered financial assistant built for the GDG Solution Challenge 2025, featuring a React + Material-UI frontend with Firebase authentication and a Python backend powered by LangChain, the Agno framework, and Google Gemini API. Users ask natural-language questions about stocks, market trends, and investment strategies.',
+      'The system combines a RAG pipeline (FAISS/Chroma vector store with relevance grading) for domain knowledge retrieval with a Deep Research Engine that recursively decomposes complex queries into sub-questions, processes them in parallel via Tavily web search and YFinance real-time data lookups, and synthesizes findings into coherent, evidence-backed responses.',
     ],
-    technicalApproach: 'The agent operates through a multi-step reasoning pipeline: query decomposition → targeted web searches → content extraction → fact verification → synthesis → report generation. Each step uses chain-of-thought reasoning to maintain analytical rigor.',
+    technicalApproach: 'The processing pipeline routes queries through small-talk detection, RAG-based knowledge retrieval with relevance scoring, optional deep research mode (recursive query decomposition with configurable depth), real-time financial data integration via YFinance API, and Tavily-powered web search—all orchestrated by LangChain agent workflows with persistent conversational memory and session management.',
     codeSnippet: `class FinancialAgent:
     async def research(self, query):
         sub_queries = self.decompose(query)

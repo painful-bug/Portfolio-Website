@@ -91,7 +91,9 @@ export default function FogWalk() {
 
       {/* Decorative Floating Element */}
       <div className="fogwalk__decor animate-fade-in-blur delay-2" aria-hidden="true">
-        <div className="fogwalk__decor-box" />
+        
+        <img src="avatar.jpg" alt="" className="fogwalk__decor-box" />
+        
       </div>
     </section>
   );
