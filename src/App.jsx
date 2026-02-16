@@ -18,9 +18,9 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'light';
+      return localStorage.getItem('theme') || 'dark';
     }
-    return 'light';
+    return 'dark';
   });
   const [revealing, setRevealing] = useState(false);
   const revealRef = useRef(null);

@@ -1,8 +1,10 @@
 /* ==========================================
    The Artifact — Detail View Modal
+   PERF: backdrop-filter kept ONLY on backdrop
+         (overlay needs blur) and close button
    ========================================== */
 
-/* Backdrop */
+/* Backdrop — kept backdrop-filter (overlay, needs real blur) */
 .artifact-backdrop {
   position: fixed;
   inset: 0;
@@ -49,6 +51,7 @@
   padding: 1.5rem;
 }
 
+/* Close button — kept backdrop-filter (overlays hero image) */
 .artifact__close {
   width: 2.75rem;
   height: 2.75rem;
@@ -63,8 +66,9 @@
   border: 1px solid var(--color-glass-border);
   box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
   color: var(--color-text-dark);
-  transition: all 0.35s var(--ease-liquid);
+  transition: background 0.35s var(--ease-liquid), box-shadow 0.35s var(--ease-liquid), transform 0.35s var(--ease-liquid);
   overflow: hidden;
+  will-change: transform;
 }
 
 .artifact__close::before {
@@ -197,13 +201,12 @@
   gap: 0.5rem;
 }
 
+/* Tech Tags — Solid Glass (no blur, gradient shine preserved) */
 .artifact__tech-tag {
   padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
   position: relative;
-  background: var(--color-glass);
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  background: var(--color-glass-solid);
   border: 1px solid var(--color-glass-border);
   box-shadow:
     0 2px 8px -2px rgba(0, 0, 0, 0.04),
@@ -244,7 +247,7 @@
   transform: scale(1.05);
 }
 
-/* Visit Button */
+/* Visit Button — Solid Glass */
 .artifact__visit-btn {
   display: inline-flex;
   align-items: center;
@@ -253,8 +256,6 @@
   padding: 1rem 1.5rem;
   position: relative;
   background: var(--color-primary-glow);
-  backdrop-filter: blur(16px) saturate(1.8);
-  -webkit-backdrop-filter: blur(16px) saturate(1.8);
   border: 1px solid rgba(24, 184, 110, 0.2);
   color: var(--color-primary);
   border-radius: var(--radius-md);
@@ -262,7 +263,7 @@
     0 4px 16px -4px rgba(24, 184, 110, 0.15),
     var(--inset-shine),
     var(--inset-edge);
-  transition: all 0.35s var(--ease-liquid);
+  transition: background 0.35s var(--ease-liquid), box-shadow 0.35s var(--ease-liquid), transform 0.35s var(--ease-liquid);
   margin-top: auto;
   overflow: hidden;
 }

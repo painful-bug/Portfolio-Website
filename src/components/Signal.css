@@ -1,5 +1,6 @@
 /* ==========================================
    Signal — Contact Footer + Dark Mode
+   PERF: backdrop-filter removed from inputs/buttons
    ========================================== */
 
 .signal {
@@ -12,6 +13,8 @@
   padding: 5rem 1.5rem;
   background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
   position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .signal__contact-section::before {
@@ -130,16 +133,14 @@
   color: var(--color-mist);
 }
 
-/* Form Inputs — Liquid Glass */
+/* Form Inputs — Solid Glass (no blur needed on inputs) */
 .signal__form-input,
 .signal__form-textarea {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-sm);
-  background: var(--color-glass);
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  background: var(--color-glass-solid);
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   color: var(--color-text-dark);
@@ -167,7 +168,7 @@
   min-height: 120px;
 }
 
-/* Submit Button — Liquid Glass */
+/* Submit Button — Solid Glass */
 .signal__form-submit {
   display: inline-flex;
   align-items: center;
@@ -177,8 +178,6 @@
   border-radius: var(--radius-md);
   position: relative;
   background: var(--color-primary-glow);
-  backdrop-filter: blur(16px) saturate(1.8);
-  -webkit-backdrop-filter: blur(16px) saturate(1.8);
   border: 1px solid rgba(24, 184, 110, 0.2);
   color: var(--color-primary);
   font-family: var(--font-sans);
@@ -190,7 +189,7 @@
     0 4px 16px -4px rgba(24, 184, 110, 0.15),
     var(--inset-shine),
     var(--inset-edge);
-  transition: all 0.35s var(--ease-liquid);
+  transition: background 0.35s var(--ease-liquid), box-shadow 0.35s var(--ease-liquid), transform 0.35s var(--ease-liquid);
   width: 100%;
   overflow: hidden;
 }

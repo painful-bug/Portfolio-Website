@@ -1,5 +1,6 @@
 /* ==========================================
    Navbar — Liquid Glass + Dark Mode
+   PERF: backdrop-filter ONLY here (fixed, single layer)
    ========================================== */
 
 .navbar {
@@ -19,7 +20,7 @@
   pointer-events: auto;
 }
 
-/* Liquid Glass Logo */
+/* Liquid Glass Logo — kept backdrop-filter (single small element, fixed) */
 .navbar__logo-circle {
   position: relative;
   width: 2.75rem;
@@ -35,6 +36,7 @@
   box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
   transition: all 0.4s var(--ease-liquid);
   overflow: hidden;
+  will-change: transform;
 }
 
 .navbar__logo-circle::before {
@@ -72,7 +74,7 @@
   gap: 0.5rem;
 }
 
-/* Liquid Glass Nav Links Container */
+/* Liquid Glass Nav Links Container — kept backdrop-filter (fixed, single element) */
 .navbar__links {
   display: flex;
   gap: 0.25rem;
@@ -110,7 +112,7 @@
   letter-spacing: 0.1em;
   color: var(--color-text);
   border-radius: var(--radius-full);
-  transition: all 0.3s var(--ease-liquid);
+  transition: color 0.3s var(--ease-liquid), background 0.3s var(--ease-liquid);
 }
 
 .navbar__link:hover {
@@ -118,7 +120,7 @@
   background: var(--color-primary-glow);
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle Button — kept backdrop-filter (single small element, fixed) */
 .navbar__theme-toggle {
   position: relative;
   width: 2.75rem;
@@ -136,6 +138,7 @@
   transition: all 0.4s var(--ease-liquid);
   overflow: hidden;
   cursor: pointer;
+  will-change: transform;
 }
 
 .navbar__theme-toggle::before {
@@ -180,7 +183,7 @@
   /* shown on mobile */
 }
 
-/* Mobile Menu Button */
+/* Mobile Menu Button — kept backdrop-filter (single small element, fixed) */
 .navbar__mobile-btn {
   display: flex;
   align-items: center;

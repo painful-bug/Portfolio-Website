@@ -1,6 +1,7 @@
 /* ========================================
    Morning Mist Portfolio — Design System
    Liquid Glass + Dark Mode Edition
+   PERFORMANCE OPTIMIZED
    ======================================== */
 
 /* ---- Light Theme (default) ---- */
@@ -13,6 +14,7 @@
   --color-glass: rgba(255, 255, 255, 0.42);
   --color-glass-border: rgba(255, 255, 255, 0.58);
   --color-glass-shine: rgba(255, 255, 255, 0.72);
+  --color-glass-solid: rgba(244, 247, 245, 0.85);
   --color-text: #4A5D54;
   --color-text-dark: #0e1b15;
   --color-mist: #97A8A0;
@@ -30,7 +32,7 @@
   --radius-sm: 14px;
   --radius-full: 9999px;
 
-  /* Liquid Glass */
+  /* Liquid Glass — only used on navbar */
   --glass-blur: 20px;
   --glass-saturate: 1.8;
   --glass-brightness: 1.05;
@@ -55,6 +57,7 @@
   --color-glass: rgba(255, 255, 255, 0.06);
   --color-glass-border: rgba(255, 255, 255, 0.10);
   --color-glass-shine: rgba(255, 255, 255, 0.12);
+  --color-glass-solid: rgba(17, 29, 23, 0.90);
   --color-text: #a8b8b0;
   --color-text-dark: #e8f0ec;
   --color-mist: #5e7068;
@@ -169,14 +172,14 @@ img {
 }
 
 /* ============================================================
-   LIQUID GLASS SYSTEM
+   LIQUID GLASS SYSTEM — PERFORMANCE OPTIMIZED
+   No backdrop-filter on cards/tags. Solid bg mimics glass.
+   backdrop-filter reserved ONLY for the navbar (fixed, single layer).
    ============================================================ */
 
 .glass-card {
   position: relative;
-  background: var(--color-glass);
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  background: var(--color-glass-solid);
   border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -202,9 +205,7 @@ img {
 /* Liquid Glass — compact pill variant */
 .liquid-glass {
   position: relative;
-  background: var(--color-glass);
-  backdrop-filter: blur(16px) saturate(1.6) brightness(var(--glass-brightness));
-  -webkit-backdrop-filter: blur(16px) saturate(1.6) brightness(var(--glass-brightness));
+  background: var(--color-glass-solid);
   border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
@@ -234,7 +235,7 @@ img {
 /* ---- Mist Image ---- */
 .mist-image {
   filter: grayscale(100%) blur(3px);
-  transition: all 0.6s var(--ease-swoop);
+  transition: filter 0.6s var(--ease-swoop), transform 0.6s var(--ease-swoop);
   will-change: filter, transform;
 }
 
@@ -252,7 +253,7 @@ img {
   box-shadow: var(--shadow-glass-hover), var(--inset-shine);
 }
 
-/* ---- Animations ---- */
+/* ---- Animations (GPU-accelerated with will-change) ---- */
 @keyframes fadeInBlur {
   0% {
     opacity: 0;
@@ -295,6 +296,7 @@ img {
 .animate-fade-in-blur {
   opacity: 0;
   animation: fadeInBlur 1.5s var(--ease-swoop) forwards;
+  will-change: opacity, filter, transform;
 }
 
 .delay-1 { animation-delay: 0.2s; }

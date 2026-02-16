@@ -1,5 +1,6 @@
 /* ==========================================
    WorkGrid — Liquid Glass + Dark Mode
+   PERF: backdrop-filter removed from cards/tags
    ========================================== */
 
 .workgrid {
@@ -7,6 +8,8 @@
   max-width: 90rem;
   margin: 0 auto;
   padding: 3rem 1.5rem 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
 }
 
 .workgrid__inner {
@@ -84,7 +87,7 @@
   min-height: 480px;
 }
 
-/* Badge — Liquid Glass */
+/* Badge — Solid Glass (kept gradient overlay for shine) */
 .project-card__badge {
   position: absolute;
   top: 1.5rem;
@@ -105,9 +108,7 @@
   padding: 0.5rem 1rem;
   border-radius: var(--radius-full);
   position: relative;
-  background: var(--color-glass);
-  backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
-  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  background: var(--color-glass-solid);
   border: 1px solid var(--color-glass-border);
   box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
   overflow: hidden;
@@ -208,14 +209,12 @@
   flex-wrap: wrap;
 }
 
-/* Tags — Liquid Glass */
+/* Tags — Solid Glass (gradient shine preserved) */
 .project-card__tag {
   padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
   position: relative;
-  background: var(--color-glass);
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  background: var(--color-glass-solid);
   border: 1px solid var(--color-glass-border);
   box-shadow:
     0 2px 8px -2px rgba(0, 0, 0, 0.04),

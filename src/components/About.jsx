@@ -56,7 +56,7 @@ export default function About() {
 
             {/* Technical Skills */}
             <div className="about__section">
-              <h3 className="about__section-title">Technical Arsenal</h3>
+              <h3 className="about__section-title">Technical Skills</h3>
               <div className="about__skills">
                 <div className="about__skill-row">
                   <span className="about__skill-label">Languages</span>
