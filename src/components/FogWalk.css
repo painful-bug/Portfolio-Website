@@ -27,9 +27,9 @@
   left: -10%;
   width: 60%;
   height: 60%;
-  background: linear-gradient(to bottom right, rgba(22, 156, 96, 0.05), transparent);
+  background: linear-gradient(to bottom right, var(--color-primary-glow), transparent);
   filter: blur(120px);
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .fogwalk__mist-blob--bottom {
@@ -37,9 +37,17 @@
   right: -5%;
   width: 50%;
   height: 50%;
-  background: linear-gradient(to top left, rgba(151, 168, 160, 0.2), transparent);
+  background: linear-gradient(to top left, rgba(6, 182, 212, 0.08), transparent);
   filter: blur(100px);
+  opacity: 0.4;
+}
+
+[data-theme="dark"] .fogwalk__mist-blob--top {
   opacity: 0.3;
+}
+
+[data-theme="dark"] .fogwalk__mist-blob--bottom {
+  opacity: 0.2;
 }
 
 .fogwalk__mist-noise {
@@ -68,19 +76,35 @@
   gap: 1.5rem;
 }
 
-/* ---- Status Pill ---- */
+/* ---- Status Pill — Liquid Glass ---- */
 .fogwalk__status {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   width: fit-content;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  background: var(--color-glass);
+  backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
+  overflow: hidden;
+}
+
+.fogwalk__status::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
 }
 
 .fogwalk__status-dot-wrap {
@@ -88,6 +112,7 @@
   display: flex;
   width: 0.625rem;
   height: 0.625rem;
+  z-index: 2;
 }
 
 .fogwalk__status-dot-ping {
@@ -113,6 +138,8 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--color-text);
+  position: relative;
+  z-index: 2;
 }
 
 /* ---- Hero Title ---- */
@@ -124,7 +151,6 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
   color: var(--color-deep-evergreen);
-  mix-blend-mode: darken;
   margin-left: -0.125rem;
 }
 
@@ -156,7 +182,7 @@
   max-width: 28rem;
 }
 
-/* ---- CTA ---- */
+/* ---- CTA — Liquid Glass Button ---- */
 .fogwalk__cta {
   margin-top: 2rem;
 }
@@ -165,31 +191,68 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-full);
+  position: relative;
+  background: var(--color-primary-glow);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  border: 1px solid rgba(24, 184, 110, 0.2);
+  box-shadow:
+    0 4px 16px -4px rgba(24, 184, 110, 0.12),
+    var(--inset-shine),
+    var(--inset-edge);
   color: var(--color-deep-evergreen);
-  transition: color 0.3s ease;
+  transition: all 0.4s var(--ease-liquid);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .fogwalk__cta-btn {
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.fogwalk__cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 .fogwalk__cta-btn:hover {
+  background: rgba(24, 184, 110, 0.18);
   color: var(--color-primary);
+  box-shadow:
+    0 8px 24px -6px rgba(24, 184, 110, 0.2),
+    var(--inset-shine),
+    var(--inset-edge);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .fogwalk__cta-btn:hover {
+  background: rgba(52, 211, 153, 0.15);
 }
 
 .fogwalk__cta-text {
-  font-weight: 500;
-  font-size: 0.875rem;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(44, 62, 54, 0.3);
-  padding-bottom: 0.125rem;
-  transition: border-color 0.3s ease;
-}
-
-.fogwalk__cta-btn:hover .fogwalk__cta-text {
-  border-color: var(--color-primary);
+  position: relative;
+  z-index: 2;
 }
 
 .fogwalk__cta-arrow {
-  font-size: 1.125rem;
+  font-size: 1rem;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .fogwalk__cta-btn:hover .fogwalk__cta-arrow {
@@ -241,7 +304,7 @@
   background: linear-gradient(to bottom, transparent, rgba(151, 168, 160, 0.5), transparent);
 }
 
-/* ---- Decorative Box ---- */
+/* ---- Decorative Box — Liquid Glass ---- */
 .fogwalk__decor {
   display: none;
   position: absolute;
@@ -255,12 +318,14 @@
 .fogwalk__decor-box {
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border-radius: var(--radius-lg);
   transform: rotate(6deg) translateY(3rem);
+  box-shadow: var(--shadow-glass), var(--inset-shine);
+  animation: float 6s ease-in-out infinite;
 }
 
 /* ---- Desktop ---- */

@@ -11,8 +11,8 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(17, 33, 26, 0.30);
-  backdrop-filter: blur(8px);
+  background: rgba(17, 33, 26, 0.40);
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(8px);
   transition: opacity 0.3s ease;
 }
@@ -23,13 +23,13 @@
   width: 80vw;
   max-width: 1400px;
   height: 90vh;
-  background: #fdfdfd;
-  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  outline: 1px solid rgba(0, 0, 0, 0.05);
+  outline: 1px solid var(--color-glass-border);
 }
 
 .artifact__noise {
@@ -50,28 +50,48 @@
 }
 
 .artifact__close {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  color: var(--color-primary);
-  transition: background 0.3s, color 0.3s;
+  position: relative;
+  background: var(--color-glass);
+  backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
+  color: var(--color-text-dark);
+  transition: all 0.35s var(--ease-liquid);
+  overflow: hidden;
+}
+
+.artifact__close::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
 }
 
 .artifact__close:hover {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-primary-glow);
+  box-shadow: var(--shadow-glass-hover), var(--inset-shine);
+  transform: scale(1.05);
 }
 
 .artifact__close-icon {
   font-size: 1.25rem;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .artifact__close:hover .artifact__close-icon {
@@ -138,7 +158,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: rgba(246, 248, 247, 0.3);
+  background: var(--color-bg-alt);
 }
 
 .artifact__meta-group {
@@ -157,7 +177,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #6b7280;
+  color: var(--color-mist);
   font-weight: 500;
 }
 
@@ -178,12 +198,32 @@
 }
 
 .artifact__tech-tag {
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(22, 156, 96, 0.2);
-  background: rgba(22, 156, 96, 0.05);
+  position: relative;
+  background: var(--color-glass);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid var(--color-glass-border);
+  box-shadow:
+    0 2px 8px -2px rgba(0, 0, 0, 0.04),
+    var(--inset-shine);
   color: var(--color-primary);
   font-size: 0.75rem;
+  overflow: hidden;
+}
+
+.artifact__tech-tag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
 }
 
 /* Detail Image */
@@ -211,16 +251,42 @@
   justify-content: space-between;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: var(--color-primary);
-  color: #fff;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 4px 12px rgba(22, 156, 96, 0.2);
-  transition: background 0.3s;
+  position: relative;
+  background: var(--color-primary-glow);
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  border: 1px solid rgba(24, 184, 110, 0.2);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 4px 16px -4px rgba(24, 184, 110, 0.15),
+    var(--inset-shine),
+    var(--inset-edge);
+  transition: all 0.35s var(--ease-liquid);
   margin-top: auto;
+  overflow: hidden;
+}
+
+.artifact__visit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 .artifact__visit-btn:hover {
-  background: #128a53;
+  background: rgba(24, 184, 110, 0.20);
+  box-shadow:
+    0 8px 24px -6px rgba(24, 184, 110, 0.25),
+    var(--inset-shine);
+  transform: translateY(-2px);
 }
 
 .artifact__visit-text {
@@ -243,14 +309,14 @@
 
 .artifact__article-title {
   font-size: 1.875rem;
-  color: #111827;
+  color: var(--color-text-dark);
   margin-bottom: 0.5rem;
 }
 
 .artifact__article-underline {
   height: 0.25rem;
   width: 5rem;
-  background: rgba(22, 156, 96, 0.3);
+  background: rgba(24, 184, 110, 0.3);
   border-radius: var(--radius-full);
 }
 
@@ -261,7 +327,7 @@
 .artifact__paragraph {
   font-size: 1.125rem;
   line-height: 1.8;
-  color: #4b5563;
+  color: var(--color-text);
 }
 
 .artifact__paragraph + .artifact__paragraph {
@@ -275,7 +341,7 @@
 
 .artifact__technical-title {
   font-size: 1.5rem;
-  color: #1f2937;
+  color: var(--color-text-dark);
   margin-bottom: 1rem;
 }
 
@@ -283,8 +349,8 @@
 .artifact__code-block {
   margin-top: 1.5rem;
   border-radius: var(--radius-sm);
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-glass-border);
   padding: 1rem;
   overflow-x: auto;
 }
@@ -310,7 +376,7 @@
   display: block;
   white-space: pre;
   font-size: 0.8125rem;
-  color: #374151;
+  color: var(--color-text);
   line-height: 1.8;
 }
 
@@ -318,12 +384,12 @@
 .artifact__credits {
   margin-top: auto;
   padding-top: 2.5rem;
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid var(--color-glass-border);
   display: flex;
   align-items: center;
   gap: 0.75rem;
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: var(--color-mist);
 }
 
 .artifact__credits-dot {
@@ -346,7 +412,7 @@
   .artifact__meta-col {
     width: 41.67%;
     padding: 2rem 3rem;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 1px solid var(--color-glass-border);
   }
 
   .artifact__narrative-col {

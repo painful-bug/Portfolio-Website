@@ -1,5 +1,5 @@
 /* ==========================================
-   Signal — Contact Footer
+   Signal — Contact Footer + Dark Mode
    ========================================== */
 
 .signal {
@@ -10,7 +10,7 @@
 /* ---- Contact Section ---- */
 .signal__contact-section {
   padding: 5rem 1.5rem;
-  background: linear-gradient(180deg, var(--color-bg) 0%, rgba(44, 62, 54, 0.04) 100%);
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
   position: relative;
 }
 
@@ -22,7 +22,7 @@
   transform: translateX(-50%);
   width: 80%;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(151, 168, 160, 0.3), transparent);
+  background: linear-gradient(to right, transparent, var(--color-glass-border), transparent);
 }
 
 .signal__contact-grid {
@@ -44,7 +44,7 @@
 .signal__label-line {
   width: 3rem;
   height: 1px;
-  background: rgba(22, 156, 96, 0.4);
+  background: rgba(24, 184, 110, 0.4);
 }
 
 .signal__label-text {
@@ -108,7 +108,7 @@
   color: var(--color-primary);
 }
 
-/* ---- Contact Form ---- */
+/* ---- Contact Form — Glass Card ---- */
 .signal__form {
   padding: 2rem;
   display: flex;
@@ -130,18 +130,22 @@
   color: var(--color-mist);
 }
 
+/* Form Inputs — Liquid Glass */
 .signal__form-input,
 .signal__form-textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid rgba(151, 168, 160, 0.25);
+  border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-glass);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   color: var(--color-text-dark);
   outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--inset-shine), var(--inset-edge);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .signal__form-input::placeholder,
@@ -152,8 +156,10 @@
 
 .signal__form-input:focus,
 .signal__form-textarea:focus {
-  border-color: rgba(22, 156, 96, 0.4);
-  box-shadow: 0 0 0 3px rgba(22, 156, 96, 0.08);
+  border-color: rgba(24, 184, 110, 0.35);
+  box-shadow:
+    0 0 0 3px rgba(24, 184, 110, 0.08),
+    var(--inset-shine);
 }
 
 .signal__form-textarea {
@@ -161,30 +167,54 @@
   min-height: 120px;
 }
 
-/* Submit Button */
+/* Submit Button — Liquid Glass */
 .signal__form-submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.5rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-primary);
-  color: #fff;
+  border-radius: var(--radius-md);
+  position: relative;
+  background: var(--color-primary-glow);
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  border: 1px solid rgba(24, 184, 110, 0.2);
+  color: var(--color-primary);
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(22, 156, 96, 0.2);
+  box-shadow:
+    0 4px 16px -4px rgba(24, 184, 110, 0.15),
+    var(--inset-shine),
+    var(--inset-edge);
+  transition: all 0.35s var(--ease-liquid);
   width: 100%;
+  overflow: hidden;
+}
+
+.signal__form-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 .signal__form-submit:hover:not(:disabled) {
-  background: #128a53;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(22, 156, 96, 0.25);
+  background: rgba(24, 184, 110, 0.20);
+  box-shadow:
+    0 8px 24px -6px rgba(24, 184, 110, 0.25),
+    var(--inset-shine);
+  transform: translateY(-2px);
 }
 
 .signal__form-submit:active:not(:disabled) {
@@ -199,6 +229,8 @@
 .signal__form-submit-icon {
   font-size: 1rem;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .signal__form-submit:hover:not(:disabled) .signal__form-submit-icon {
@@ -208,7 +240,7 @@
 /* ---- Bottom Bar ---- */
 .signal__bottom {
   padding: 1.5rem;
-  border-top: 1px solid rgba(232, 243, 238, 0.8);
+  border-top: 1px solid var(--color-glass-border);
   background: var(--color-bg);
 }
 
@@ -223,7 +255,7 @@
 
 .signal__copy {
   font-size: 0.8125rem;
-  color: rgba(14, 27, 21, 0.35);
+  color: var(--color-mist);
 }
 
 .signal__bottom-links {
@@ -235,7 +267,7 @@
   font-size: 0.8125rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(14, 27, 21, 0.5);
+  color: var(--color-mist);
   transition: color 0.3s ease;
   position: relative;
 }

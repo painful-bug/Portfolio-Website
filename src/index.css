@@ -1,18 +1,23 @@
 /* ========================================
    Morning Mist Portfolio — Design System
+   Liquid Glass + Dark Mode Edition
    ======================================== */
 
+/* ---- Light Theme (default) ---- */
 :root {
   /* Color Palette */
-  --color-primary: #169c60;
-  --color-bg: #f6f8f7;
-  --color-bg-dark: #11211a;
-  --color-glass: rgba(255, 255, 255, 0.60);
-  --color-glass-border: rgba(255, 255, 255, 0.40);
+  --color-primary: #18b86e;
+  --color-primary-glow: rgba(24, 184, 110, 0.15);
+  --color-bg: #f4f7f5;
+  --color-bg-alt: #eef2f0;
+  --color-glass: rgba(255, 255, 255, 0.42);
+  --color-glass-border: rgba(255, 255, 255, 0.58);
+  --color-glass-shine: rgba(255, 255, 255, 0.72);
   --color-text: #4A5D54;
   --color-text-dark: #0e1b15;
   --color-mist: #97A8A0;
   --color-deep-evergreen: #2C3E36;
+  --color-surface: #fdfdfd;
 
   /* Typography */
   --font-serif: 'Newsreader', serif;
@@ -20,13 +25,46 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Radii */
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 8px;
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
   --radius-full: 9999px;
+
+  /* Liquid Glass */
+  --glass-blur: 20px;
+  --glass-saturate: 1.8;
+  --glass-brightness: 1.05;
 
   /* Timing */
   --ease-swoop: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-liquid: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-glass: 0 4px 24px -4px rgba(0, 0, 0, 0.06);
+  --shadow-glass-hover: 0 8px 32px -6px rgba(0, 0, 0, 0.1);
+  --inset-shine: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --inset-edge: inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* ---- Dark Theme ---- */
+[data-theme="dark"] {
+  --color-primary: #34d399;
+  --color-primary-glow: rgba(52, 211, 153, 0.12);
+  --color-bg: #0c1410;
+  --color-bg-alt: #111d17;
+  --color-glass: rgba(255, 255, 255, 0.06);
+  --color-glass-border: rgba(255, 255, 255, 0.10);
+  --color-glass-shine: rgba(255, 255, 255, 0.12);
+  --color-text: #a8b8b0;
+  --color-text-dark: #e8f0ec;
+  --color-mist: #5e7068;
+  --color-deep-evergreen: #e8f0ec;
+  --color-surface: #141f19;
+
+  --shadow-glass: 0 4px 24px -4px rgba(0, 0, 0, 0.3);
+  --shadow-glass-hover: 0 8px 32px -6px rgba(0, 0, 0, 0.4);
+  --inset-shine: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --inset-edge: inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* ---- Reset & Base ---- */
@@ -50,10 +88,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
+  transition: background-color 0s; /* handled by reveal animation */
 }
 
 ::selection {
-  background-color: rgba(22, 156, 96, 0.2);
+  background-color: rgba(24, 184, 110, 0.2);
   color: var(--color-primary);
 }
 
@@ -82,7 +121,7 @@ img {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #d1d5db;
+  background-color: rgba(151, 168, 160, 0.3);
   border-radius: 20px;
 }
 
@@ -96,21 +135,103 @@ img {
   inset: 0;
   pointer-events: none;
   z-index: 100;
-  opacity: 0.4;
+  opacity: 0.3;
   mix-blend-mode: overlay;
 }
 
-/* ---- Glass Card ---- */
+[data-theme="dark"] .noise-overlay {
+  opacity: 0.15;
+  mix-blend-mode: soft-light;
+}
+
+/* ============================================================
+   DARK MODE REVEAL ANIMATION
+   ============================================================ */
+.theme-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 50%));
+}
+
+.theme-reveal--active {
+  animation: themeReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes themeReveal {
+  0% {
+    clip-path: circle(0% at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  }
+  100% {
+    clip-path: circle(150% at var(--reveal-x, 50%) var(--reveal-y, 50%));
+  }
+}
+
+/* ============================================================
+   LIQUID GLASS SYSTEM
+   ============================================================ */
+
 .glass-card {
-  background-color: var(--color-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  background: var(--color-glass);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
   border: 1px solid var(--color-glass-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
 }
 
-/* ---- Mist Image (Grayscale + blur default) ---- */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.05) 30%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Liquid Glass — compact pill variant */
+.liquid-glass {
+  position: relative;
+  background: var(--color-glass);
+  backdrop-filter: blur(16px) saturate(1.6) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(16px) saturate(1.6) brightness(var(--glass-brightness));
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
+  transition: all 0.4s var(--ease-liquid);
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.liquid-glass:hover {
+  box-shadow: var(--shadow-glass-hover), var(--inset-shine), var(--inset-edge);
+  transform: translateY(-1px);
+}
+
+/* ---- Mist Image ---- */
 .mist-image {
   filter: grayscale(100%) blur(3px);
   transition: all 0.6s var(--ease-swoop);
@@ -128,7 +249,7 @@ img {
 }
 .hover-lift:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px -10px rgba(44, 62, 54, 0.10);
+  box-shadow: var(--shadow-glass-hover), var(--inset-shine);
 }
 
 /* ---- Animations ---- */
@@ -166,6 +287,11 @@ img {
   50% { opacity: 0.5; }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(6deg); }
+  50% { transform: translateY(-12px) rotate(8deg); }
+}
+
 .animate-fade-in-blur {
   opacity: 0;
   animation: fadeInBlur 1.5s var(--ease-swoop) forwards;
@@ -197,14 +323,16 @@ img {
 }
 
 /* ---- Typography Helpers ---- */
-.font-serif {
-  font-family: var(--font-serif);
-}
-.font-sans {
-  font-family: var(--font-sans);
-}
-.font-mono {
-  font-family: var(--font-mono);
+.font-serif { font-family: var(--font-serif); }
+.font-sans { font-family: var(--font-sans); }
+.font-mono { font-family: var(--font-mono); }
+
+/* ---- Accent Gradient Text ---- */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ---- Modal custom scrollbar ---- */
@@ -215,6 +343,6 @@ img {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
+  background-color: rgba(151, 168, 160, 0.3);
   border-radius: 20px;
 }

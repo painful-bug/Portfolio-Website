@@ -1,83 +1,235 @@
+/* ==========================================
+   Navbar — Liquid Glass + Dark Mode
+   ========================================== */
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 50;
-  padding: 2rem 3rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  mix-blend-mode: multiply;
+  padding: 1rem 1.5rem;
   pointer-events: none;
 }
 
-.navbar__logo {
+.navbar > * {
   pointer-events: auto;
 }
 
+/* Liquid Glass Logo */
 .navbar__logo-circle {
-  width: 2rem;
-  height: 2rem;
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
-  border: 1px solid rgba(74, 93, 84, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: transform 0.5s ease;
+  background: var(--color-glass);
+  backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
+  transition: all 0.4s var(--ease-liquid);
+  overflow: hidden;
 }
 
-.navbar__logo:hover .navbar__logo-circle {
-  transform: scale(1.1);
+.navbar__logo-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.navbar__logo-circle:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-glass-hover), var(--inset-shine), var(--inset-edge);
 }
 
 .navbar__logo-initial {
   font-family: var(--font-serif);
+  font-size: 1.25rem;
   font-style: italic;
-  font-weight: 500;
-  font-size: 1.125rem;
-  color: var(--color-deep-evergreen);
+  color: var(--color-text-dark);
+  position: relative;
+  z-index: 2;
 }
 
+/* Right side container */
+.navbar__right {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Liquid Glass Nav Links Container */
 .navbar__links {
   display: flex;
-  gap: 2rem;
-  pointer-events: auto;
+  gap: 0.25rem;
+  padding: 0.375rem;
+  border-radius: var(--radius-full);
+  background: var(--color-glass);
+  backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar__links::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    transparent 60%
+  );
+  pointer-events: none;
 }
 
 .navbar__link {
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 2;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   color: var(--color-text);
-  transition: color 0.3s ease;
+  border-radius: var(--radius-full);
+  transition: all 0.3s var(--ease-liquid);
 }
 
 .navbar__link:hover {
   color: var(--color-primary);
+  background: var(--color-primary-glow);
 }
 
+/* Theme Toggle Button */
+.navbar__theme-toggle {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-glass);
+  backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate)) brightness(var(--glass-brightness));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass), var(--inset-shine), var(--inset-edge);
+  color: var(--color-text-dark);
+  transition: all 0.4s var(--ease-liquid);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.navbar__theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.navbar__theme-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-glass-hover), var(--inset-shine);
+}
+
+.navbar__theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s var(--ease-swoop);
+}
+
+.navbar__theme-icon--rotated {
+  transform: rotate(360deg);
+}
+
+/* Mobile Group */
+.navbar__mobile-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar__theme-toggle--mobile {
+  /* shown on mobile */
+}
+
+/* Mobile Menu Button */
 .navbar__mobile-btn {
-  display: none;
-  pointer-events: auto;
-  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-glass);
+  backdrop-filter: blur(20px) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(20px) saturate(var(--glass-saturate));
+  border: 1px solid var(--color-glass-border);
+  box-shadow: var(--shadow-glass), var(--inset-shine);
+  color: var(--color-text-dark);
+  transition: all 0.3s var(--ease-liquid);
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar__mobile-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-glass-shine) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
 }
 
 .navbar__mobile-btn:hover {
-  color: var(--color-primary);
+  transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
+.navbar__mobile-btn .material-symbols-outlined {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 768px) {
   .navbar {
-    padding: 1.5rem 1.5rem;
+    padding: 1.25rem 2.5rem;
   }
-  .navbar__links {
+  .navbar__right {
+    display: flex;
+  }
+  .navbar__mobile-group {
     display: none;
-  }
-  .navbar__mobile-btn {
-    display: block;
   }
 }
